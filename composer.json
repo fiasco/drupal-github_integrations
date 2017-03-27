@@ -1,0 +1,24 @@
+{
+    "name": "drupal/github_integrations",
+    "description": "Exposes Github Integrations API to Drupal",
+    "type": "drupal-module",
+    "homepage": "https://drupal.org/project/github_integrations",
+    "authors": [
+        {
+            "name": "Josh Waihi (fiasco)",
+            "homepage": "https://www.drupal.org/u/joshwaihi",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://drupal.org/project/issues/github_integrations",
+        "irc": "irc://irc.freenode.org/drupal-contribute",
+        "source": "https://cgit.drupalcode.org/github_integrations"
+    },
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "require": {
+        "knplabs/github-api": "^2.0",
+        "php-http/guzzle6-adapter": "^1.0"
+    }
+}

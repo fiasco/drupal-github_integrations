@@ -1,0 +1,6 @@
+entity.github_integrations_config_entity.add_form:
+  route_name: 'entity.github_integrations_config_entity.add_form'
+  title: 'Add GitHub Integrations Configuration'
+  appears_on:
+    - entity.github_integrations_config_entity.collection
+

@@ -1,0 +1,5 @@
+name: GitHub Integrations
+type: module
+description: Expose Drupal to GitHub Integrations API
+core: 8.x
+package: GitHub
