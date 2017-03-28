@@ -1,9 +1,8 @@
 
 # GitHub Integrations Configuration menu items definition
-entity.github_integrations_config_entity.collection:
+entity.github_integrations_config.collection:
   title: 'GitHub Integrations Configuration'
-  route_name: entity.github_integrations_config_entity.collection
+  route_name: entity.github_integrations_config.collection
   description: 'List GitHub Integrations Configuration (bundles)'
   parent: system.admin_structure
   weight: 99
-

@@ -1,6 +1,6 @@
-github_integrations.github_integrations_config_entity.*:
+github_integrations.github_integrations_config.*:
   type: config_entity
-  label: 'GitHub Integrations Configuration config'
+  label: 'GitHub Integration'
   mapping:
     id:
       type: string
@@ -10,6 +10,9 @@ github_integrations.github_integrations_config_entity.*:
       label: 'Label'
     uuid:
       type: string
+    integration_id:
+      type: integer
+      label: 'Integration ID'
     private_key:
       type: string
       label: 'Private key'
