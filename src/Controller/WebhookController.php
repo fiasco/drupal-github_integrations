@@ -89,6 +89,9 @@ class WebhookController extends ControllerBase {
 
     $event_type = $request->headers->get('X-GitHub-Event');
     $id = $request->headers->get('X-GitHub-Delivery');
+
+    $this->loggerFactory->get('github_integrations')->info("Webhook $event_type incoming - $id");
+
     $type = WebhookEvents::find($event_type);
     $payload = json_decode($request->getContent());
 
