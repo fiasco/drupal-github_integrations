@@ -1,0 +1,7 @@
+services:
+  github_integrations.integrations_installations_repositories_list:
+    class: Drupal\github_integrations\Command\InstallationRepositoriesListCommand
+    arguments: []
+    tags:
+      - { name: drupal.command }
+

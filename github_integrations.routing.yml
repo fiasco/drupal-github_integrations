@@ -1,0 +1,10 @@
+
+github_integrations.webhook_controller_receive:
+  path: '/github-integrations/webhook/{github_integrations_config}'
+  methods: [POST]
+  defaults:
+    _controller: '\Drupal\github_integrations\Controller\WebhookController::receive'
+    _title: 'receive'
+  requirements:
+    _permission: 'access content'
+    github_integrations_config: ^[a-zA-Z0-9_]+

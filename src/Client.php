@@ -8,6 +8,7 @@ use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Github\HttpClient\Builder as GithubBuilder;
 use Github\Client as GithubClient;
 use Drupal\github_integrations\Entity\GithubIntegrationsConfigEntityInterface as ConfigEntityInterface;
+use Drupal\node\Entity\Node;
 
 class Client {
 
@@ -25,7 +26,39 @@ class Client {
   {
     $builder = new GithubBuilder();
     $github = new GithubClient($builder, Client::AGENT);
+    $github->authenticate(self::getJwtToken($entity, $exp), null, GithubClient::AUTH_JWT);
 
+    $installations = $github->api('integrations')->findInstallations();
+    return $installations;
+  }
+
+  /**
+   * Initialise a github API client with a known installation.
+   *
+   * @param node $installation
+   *
+   * @param int $exp
+   *    expiration of client session in seconds.
+   */
+  static public function init(Node $installation, $exp = 60)
+  {
+    $builder = new GithubBuilder();
+    $config = $installation->get('field_integration')
+                ->first()
+                ->get('entity')
+                ->getTarget()
+                ->getValue();
+
+    $github = new GithubClient($builder, Client::AGENT);
+    $github->authenticate(self::getJwtToken($config, $exp), null, GithubClient::AUTH_JWT);
+    $token = $github->api('integrations')->createInstallationToken((int) $installation->get('field_id')->getString());
+
+    $github->authenticate($token['token'], null, GithubClient::AUTH_HTTP_TOKEN);
+    return $github;
+  }
+
+  static public function getJwtToken(ConfigEntityInterface $entity, $exp = 60)
+  {
     $time = time();
 
     $jwt = (new JWTBuilder)
@@ -34,12 +67,7 @@ class Client {
         ->setExpiration($time + $exp)
         ->sign(new Sha256(),  new Key($entity->get('private_key')))
         ->getToken();
-
-
-    $github->authenticate($jwt, null, GithubClient::AUTH_JWT);
-
-    $installations = $github->api('integrations')->findInstallations();
-    return $installations;
+    return $jwt;
   }
 }
 

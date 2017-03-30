@@ -1,0 +1,6 @@
+services:
+  github_integrations.webhook:
+    class: Drupal\github_integrations\EventSubscriber\WebhookSubscriber
+    arguments: ['@logger.factory', '@queue']
+    tags:
+      - { name: event_subscriber }
