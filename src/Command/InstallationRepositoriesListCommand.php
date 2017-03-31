@@ -45,12 +45,12 @@ class InstallationRepositoriesListCommand extends Command {
 
     $nid = $input->getArgument('installation');
     $node = node_load($nid);
-    var_dump($node->field_id->first()->getString());die;
+
     $node->field_id->getString();
 
-    $client = Client::init($node);
-    $repos = $client->api('integrations')->listRepositories();
-    print_r($repos);
+    $client = Client::init($node, 600);
+    // $repos = $client->api('integrations')->listRepositories();
+
 
     $io->info($this->trans('commands.integrations.installations.repositories.list.messages.success'));
   }

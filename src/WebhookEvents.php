@@ -5,6 +5,8 @@ namespace Drupal\github_integrations;
 final class WebhookEvents {
   const INSTALL = "integration_installation";
 
+  const INSTALL_REPOS = "integration_installation_repositories";
+
   const PING = "ping";
 
   /**
@@ -13,6 +15,7 @@ final class WebhookEvents {
   static public function find($event_type) {
     switch ($event_type) {
       case self::INSTALL:
+      case self::INSTALL_REPOS:
         return 'github_integrations.install';
 
       case self::PING:

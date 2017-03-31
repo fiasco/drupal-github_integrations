@@ -53,6 +53,12 @@ class Client {
     $github->authenticate(self::getJwtToken($config, $exp), null, GithubClient::AUTH_JWT);
     $token = $github->api('integrations')->createInstallationToken((int) $installation->get('field_id')->getString());
 
+    \Drupal::logger('github_integrations')->notice("Opened up API for @exp seconds with token @token for installation on @account", [
+      '@exp' => $exp,
+      '@token' => $token['token'],
+      '@account' => $installation->getTitle(),
+    ]);
+
     $github->authenticate($token['token'], null, GithubClient::AUTH_HTTP_TOKEN);
     return $github;
   }
